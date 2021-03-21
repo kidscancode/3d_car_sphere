@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://debug/DebugOverlay.gd" type="Script" id=1]
+[ext_resource path="res://debug/DebugDraw3D.gd" type="Script" id=2]
+[ext_resource path="res://debug/DebugStats.gd" type="Script" id=3]
+
+[node name="DebugOverlay" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="DebugDraw3D" type="Control" parent="."]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DebugStats" type="MarginContainer" parent="."]
+anchor_bottom = 1.0
+margin_right = 395.0
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Column" type="VBoxContainer" parent="DebugStats"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 375.0
+margin_bottom = 580.0
+custom_constants/separation = 5

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/kenney_car_kit/truck.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/texture_09.png" type="Texture" id=2]
+[ext_resource path="res://cars/BallCar.gd" type="Script" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.15
+
+[sub_resource type="SphereShape" id=2]
+radius = 1.5
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 1, 1, 1, 0.47451 )
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="SphereMesh" id=4]
+material = SubResource( 3 )
+radius = 1.5
+height = 3.0
+
+[node name="carTruck" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="CarMesh" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0.5 )
+
+[node name="RayCast" type="RayCast" parent="CarMesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+enabled = true
+
+[node name="ContextRays" type="Spatial" parent="CarMesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.793407, 0 )
+
+[node name="Ball" type="RigidBody" parent="."]
+physics_material_override = SubResource( 1 )
+gravity_scale = 10.0
+angular_damp = 5.0
+
+[node name="CollisionShape" type="CollisionShape" parent="Ball"]
+shape = SubResource( 2 )
+
+[node name="DebugMesh" type="MeshInstance" parent="Ball"]
+visible = false
+mesh = SubResource( 4 )
+material/0 = null
